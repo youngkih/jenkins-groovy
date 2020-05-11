@@ -81,8 +81,6 @@ properties([
 
                 string(name: 'DURATION', defaultValue: '10', description: 'How long in minutes should load testing last?'),
 
-                string(name: 'USERS_COUNT', defaultValue: '100', description: 'Number of total users to simulate'),
-
                 string(name: 'USERS_PER_NODE', defaultValue: '50', description: 'Number of users to simulate per node'),
 
                 string(name: 'HATCH_RATE', defaultValue: '10', description: 'Users spawned per second'),
