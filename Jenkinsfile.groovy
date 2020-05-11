@@ -71,7 +71,7 @@ properties([
         parameters([
                 [$class: 'ChoiceParameter', choiceType: 'PT_CHECKBOX', filterable: true, name: 'LOCUST_FILE', script: [$class: 'GroovyScript', fallbackScript: [classpath: [], sandbox: false, script: 'return ["ERROR"]'], script: [classpath: [], sandbox: false, script:  locustFiles]]],
                 [$class: 'DynamicReferenceParameter', choiceType: 'ET_FORMATTED_HTML',name: 'USER_COUNT', referencedParameters: 'LOCUST_FILE', script: [$class: 'GroovyScript', fallbackScript: [classpath: [], sandbox: false, script: 'return ["error"]'], script: [classpath: [], sandbox: false, script: userCountScript()]]],
-                [$class: 'StringParameterValue', name: 'IMAGE_TAG', description: 'Which tag would you like to run?']
+                string(name: 'IMAGE_TAG', defaultValue: 'latest', description: 'Which tag would you like to run?')
         ])
 ])
 pipeline {
