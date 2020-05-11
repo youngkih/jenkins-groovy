@@ -134,7 +134,7 @@ pipeline {
             sh '''
               echo "Building.."
               python ./set_env.py
-              
+              echo $ADMIN_PORTAL_URL > "$(pwd)/admin_portal_url"
             '''
           }
         }

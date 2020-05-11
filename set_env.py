@@ -1,19 +1,19 @@
 import os
 
-def get_domain(test_env):
-    if test_env in ["qca01", "qa", "ujetqa"]:
-        domain = "cb.ujetqa.co"
-    elif test_env in ["tst01", "pr", "ujetpr"]:
-        domain = "cb.ujetpr.co"
-    elif test_env in ["rel01", "rel02", "ujetrc"]:
-        domain = "cb.ujetrc.co"
-    elif test_env in ["stg01", "stg02", "ujetst"]:
-        domain = "cb.ujetst.co"
-    elif "prj" in test_env:
-        domain = "prj{}.dev.ujet.xyz".format(os.getenv("TEST_COMPANY")[0:2])
+def set_ap_url(env, company):
+    if env in ["qca01", "qa", "ujetqa"]:
+        url = "https://{}.cb.ujetqa.co".format(company)
+    elif env in ["tst01", "pr", "ujetpr"]:
+        url = "https://{}.cb.ujetpr.co".format(company)
+    elif env in ["rel01", "rel02", "ujetrc"]:
+        url = "https://{}.cb.ujetrc.co".format(company)
+    elif env in ["stg01", "stg02", "ujetst"]:
+        url = "https://{}.cb.ujetst.co".format(company)
+    elif "prj" in env:
+        url = "https://{}.prj{}.dev.ujet.xyz".format(company[2:], company[0:2])
     else:
-        domain = "{}.ujet.co".format(test_env)
-    return domain
+        url = "https://{}.{}.ujet.co".format(company, env)
+    os.environ["ADMIN_PORTAL_URL"] = url
 
 print("LOCUST_FILE : {}".format(os.getenv("LOCUST_FILE")))
 print("USER_COUNT : {}".format(os.getenv("USER_COUNT")))
@@ -30,7 +30,7 @@ for user_count in user_counts:
 print("Total necessary user count: {}".format(total))
 
 os.environ["USER_COUNT"] = str(total)
-os.environ["ADMIN_PORTAL_URL"] = "https://{}.{}".format(os.getenv("TEST_COMPANY")[2:], get_domain(os.getenv("TEST_ENV")))
+set_ap_url(os.getenv("TEST_ENV"), os.getenv("TEST_COMPANY"))
 
 print("Admin portal URL : {}".format(os.getenv("ADMIN_PORTAL_URL")))
 
