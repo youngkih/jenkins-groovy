@@ -129,10 +129,9 @@ pipeline {
           }
         }
 
-        stage('Build') {
+        stage('Set up') {
           steps {
             sh '''#!/bin/bash
-              echo "Building.."
               python ./set_env.py
               source .env_tmp
               echo $ADMIN_PORTAL_URL > "$(pwd)/admin_portal_url"
@@ -141,6 +140,15 @@ pipeline {
           }
         }
 
+        stage('Check env vars') {
+          steps {
+            sh '''#!/bin/bash
+              echo "Check env vars"
+              echo $ADMIN_PORTAL_URL
+              echo $USER_COUNT
+            '''
+          }
+        }
       }
 
       post {
