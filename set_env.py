@@ -1,6 +1,6 @@
 import os
 
-def set_ap_url(env, company):
+def get_ap_url(env, company):
     if env in ["qca01", "qa", "ujetqa"]:
         url = "https://{}.cb.ujetqa.co".format(company)
     elif env in ["tst01", "pr", "ujetpr"]:
@@ -13,7 +13,7 @@ def set_ap_url(env, company):
         url = "https://{}.prj{}.dev.ujet.xyz".format(company[2:], company[0:2])
     else:
         url = "https://{}.{}.ujet.co".format(company, env)
-    os.environ["ADMIN_PORTAL_URL"] = url
+    return url
 
 print("LOCUST_FILE : {}".format(os.getenv("LOCUST_FILE")))
 print("USER_COUNT : {}".format(os.getenv("USER_COUNT")))
@@ -29,8 +29,17 @@ for user_count in user_counts:
 
 print("Total necessary user count: {}".format(total))
 
-os.environ["USER_COUNT"] = str(total)
-set_ap_url(os.getenv("TEST_ENV"), os.getenv("TEST_COMPANY"))
+user_count = str(total)
+admin_portal_url = get_ap_url(os.getenv("TEST_ENV"), os.getenv("TEST_COMPANY"))
 
-print("Admin portal URL : {}".format(os.getenv("ADMIN_PORTAL_URL")))
+print("Admin portal URL : {}".format(admin_portal_url))
 
+f = open(".env_tmp","w+")
+
+f.write(
+    """export \\
+    USER_COUNT={} \\
+    ADMIN_PORTAL_URL={}
+    """.format(user_count, admin_portal_url))
+
+f.close()
