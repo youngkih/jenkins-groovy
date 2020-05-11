@@ -1,15 +1,15 @@
 #!/usr/bin/env groovy
 // Define variables
 //List locust_list = ["\"enduser_login.py\"","\"agent_login.py\"","\"a.py\""]
-List locust_list = ["\"demo.py\"",
-                    "\"admin_dashboard_watch.py\"",
-                    "\"agent_login.py\"",
-                    "\"agent_transfer.py\"",
-                    "\"end_user_get_menus.py\"",
-                    "\"end_user_login.py\"",
-                    "\"public_get_agent_activity_logs.py\"",
-                    "\"public_get_calls.py\"",
-                    "\"public_get_chats.py\""]
+List locust_list = ["\"demo\"",
+                    "\"admin_dashboard_watch\"",
+                    "\"agent_login\"",
+                    "\"agent_transfer\"",
+                    "\"end_user_get_menus\"",
+                    "\"end_user_login\"",
+                    "\"public_get_agent_activity_logs\"",
+                    "\"public_get_calls\"",
+                    "\"public_get_chats\""]
 String locustFiles = buildScript(locust_list)
 
 String userCountScript(){
