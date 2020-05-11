@@ -70,8 +70,28 @@ String buildScript(List values){
 properties([
         parameters([
                 [$class: 'ChoiceParameter', choiceType: 'PT_CHECKBOX', filterable: true, name: 'LOCUST_FILE', script: [$class: 'GroovyScript', fallbackScript: [classpath: [], sandbox: false, script: 'return ["ERROR"]'], script: [classpath: [], sandbox: false, script:  locustFiles]]],
+
                 [$class: 'DynamicReferenceParameter', choiceType: 'ET_FORMATTED_HTML',name: 'USER_COUNT', referencedParameters: 'LOCUST_FILE', script: [$class: 'GroovyScript', fallbackScript: [classpath: [], sandbox: false, script: 'return ["error"]'], script: [classpath: [], sandbox: false, script: userCountScript()]]],
-                string(name: 'IMAGE_TAG', defaultValue: 'latest', description: 'Which tag would you like to run?')
+
+                string(name: 'IMAGE_TAG', defaultValue: 'latest', description: 'Which tag would you like to run?'),
+
+                string(name: 'TEST_ENV', defaultValue: 'tst01', description: 'Environment where the tenant exist'),
+
+                string(name: 'TEST_COMPANY', defaultValue: 'ujetload', description: 'Tenant where agents will login'),
+
+                string(name: 'DURATION', defaultValue: '10', description: 'How long in minutes should load testing last?'),
+
+                string(name: 'USERS_COUNT', defaultValue: '100', description: 'Number of total users to simulate'),
+
+                string(name: 'USERS_PER_NODE', defaultValue: '50', description: 'Number of users to simulate per node'),
+
+                string(name: 'HATCH_RATE', defaultValue: '10', description: 'Users spawned per second'),
+
+                choice(name: 'DRY_RUN', choices: ['No', 'Yes'], description: "Is this a dry-run to refresh params?"),
+
+                string(name: 'UJET_ENG_NAME', defaultValue: 'Locust_User', description: 'Sets who ran the job in Report Portal'),
+
+                choice(name: 'LOG_LEVEL', choices: ['ERROR', 'INFO', 'DEBUG'], description: "How much log do you want to see?")
         ])
 ])
 pipeline {
@@ -84,6 +104,7 @@ pipeline {
           echo "Locust files: $LOCUST_FILE"
           echo "User count: $USER_COUNT"
           echo "IMAGE_TAG: $IMAGE_TAG"
+          echo "IMAGE_TAG: $UJET_ENG_NAME"
           python ./parse_vars.py
         '''
       }
