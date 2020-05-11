@@ -60,7 +60,7 @@ String buildScript(List values){
 //          echo "Building.."
 //          echo "Locust files: $LOCUST_FILE"
 //          echo "User count: $USER_COUNT"
-//          python ./parse_vars.py
+//          python ./set_env.py
 //        '''
 //      }
 //    }
@@ -133,9 +133,8 @@ pipeline {
           steps {
             sh '''
               echo "Building.."
-              echo "Locust files: $LOCUST_FILE"
-              echo "User count: $USER_COUNT"
-              python ./parse_vars.py
+              python ./set_env.py
+              
             '''
           }
         }
