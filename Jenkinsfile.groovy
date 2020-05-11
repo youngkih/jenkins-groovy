@@ -96,6 +96,16 @@ properties([
 ])
 pipeline {
   agent any
+
+  environment {
+    TEST_TYPE = 'Locust'
+    QUEUE_URL = 'internal-automation-controller-1411232222.us-west-2.elb.amazonaws.com'
+    RP_ENDPOINT = 'http://report-portal-alb-pub-1494733986.us-west-2.elb.amazonaws.com:8080/api/v1'
+    RP_UUID = 'f94e965e-7e12-4973-ae44-4d242807fc8c'
+    LOCUST_URL = 'http://a43238a2173eb11ea92f90264cacffe3-1349624597.us-west-2.elb.amazonaws.com:8089'
+    CLUSTER_NAME = 'automation'
+  }
+
   stages {
     stage('Build'){
       steps {
@@ -104,7 +114,8 @@ pipeline {
           echo "Locust files: $LOCUST_FILE"
           echo "User count: $USER_COUNT"
           echo "IMAGE_TAG: $IMAGE_TAG"
-          echo "IMAGE_TAG: $UJET_ENG_NAME"
+          echo "UJET_ENG_NAME: $UJET_ENG_NAME"
+          echo "LOCUST_URL : $LOCUST_URL"
           python ./parse_vars.py
         '''
       }
