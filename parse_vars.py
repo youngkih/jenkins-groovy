@@ -9,6 +9,8 @@ user_counts= os.getenv("USER_COUNT").split(",")
 total = 0
 
 for user_count in user_counts:
+    if len(user_count.strip()) == 0:
+        continue
     total += int(user_count)
 
 print("Total necessary user count: {}".format(total))
