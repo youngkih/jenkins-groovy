@@ -1,7 +1,15 @@
 #!/usr/bin/env groovy
 // Define variables
 //List locust_list = ["\"enduser_login.py\"","\"agent_login.py\"","\"a.py\""]
-List locust_list = ["\"enduser_login.py\"","\"agent_login.py\"","\"a.py\"","\"b.py\"","\"c.py\"","\"d.py\"","\"e.py\"","\"f.py\"","\"g.py\"","\"h.py\"","\"i.py\""]
+List locust_list = ["\"demo.py\"",
+                    "\"admin_dashboard_watch.py\"",
+                    "\"agent_login.py\"",
+                    "\"agent_transfer.py\"",
+                    "\"end_user_get_menus.py\"",
+                    "\"end_user_login.py\"",
+                    "\"public_get_agent_activity_logs.py\"",
+                    "\"public_get_calls.py\"",
+                    "\"public_get_chats.py\""]
 String locustFiles = buildScript(locust_list)
 
 String userCountScript(){
@@ -51,6 +59,7 @@ pipeline {
           echo "Building.."
           echo "Locust files: $LOCUST_FILE"
           echo "User count: $USER_COUNT"
+          ./parse_vars.py
         '''
       }
     }
