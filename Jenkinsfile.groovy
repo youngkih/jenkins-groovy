@@ -59,7 +59,7 @@ pipeline {
           echo "Building.."
           echo "Locust files: $LOCUST_FILE"
           echo "User count: $USER_COUNT"
-          ./parse_vars.py
+          python ./parse_vars.py
         '''
       }
     }
