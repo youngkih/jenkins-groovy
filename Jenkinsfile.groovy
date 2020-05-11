@@ -131,7 +131,7 @@ pipeline {
 
         stage('Build') {
           steps {
-            sh '''
+            sh '''#!/bin/bash
               echo "Building.."
               python ./set_env.py
               source .env_tmp
