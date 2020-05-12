@@ -123,7 +123,7 @@ pipeline {
             script {
               String locustFile = "${LOCUST_FILE}";
               def times = locustFile.count(",") as int;
-              def files = locustFiles.split(",");
+              def files = locustFile.split(",");
               int i;
               for(i =0;i<=times;i++){
                 println("Start!")
