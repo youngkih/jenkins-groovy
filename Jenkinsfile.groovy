@@ -127,7 +127,8 @@ pipeline {
               int i;
               for(i =0;i<=times;i++){
                 println("Start!")
-                env.LOCUST_FILE = files[i]
+                println(files[i])
+//                env.LOCUST_FILE = files[i]
                 sh 'printenv'
               }
 
