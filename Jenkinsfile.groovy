@@ -121,10 +121,18 @@ pipeline {
         stage("Parameterizing") {
           steps {
             script {
+
+              def x = ['a', 'b', 'c']
+              println x
+              for(String item: x) {
+                println item
+              }
+
               if ("${params.DRY_RUN}" == "Yes") {
                 currentBuild.result = 'ABORTED'
                 error('DRY RUN COMPLETED. JOB PARAMETERIZED.')
               }
+
             }
           }
         }
