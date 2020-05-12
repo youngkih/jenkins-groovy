@@ -122,8 +122,11 @@ pipeline {
           steps {
             script {
               String locustFile = "${LOCUST_FILE}";
-              def times = locustFile.count(",") as int;
+
               def files = locustFile.split(",");
+              def times = locustFile.count(",") as int;
+
+              println("Size of files : " +files.length);
 
               for(i =0;i<=times;i++){
                 println("Start!")
