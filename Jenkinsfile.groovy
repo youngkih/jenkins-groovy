@@ -123,13 +123,15 @@ pipeline {
             script {
               String locustFile = "${LOCUST_FILE}";
               def times = locustFile.count(",") as int;
+              def files = locustFiles.split(",");
               int i;
               for(i =0;i<=times;i++){
-                println i
-                if ("${params.DRY_RUN}" != "Yes") {
-                  println("DRY RUN NO!")
-                }
+                println("Start!")
+                env.LOCUST_FILE = files[i]
+                sh 'printenv'
               }
+
+              //
 
               if ("${params.DRY_RUN}" == "Yes") {
                 currentBuild.result = 'ABORTED'
