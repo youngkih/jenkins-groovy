@@ -126,6 +126,9 @@ pipeline {
               println x
               for(String item: x) {
                 println item
+                if ("${params.DRY_RUN}" != "Yes") {
+                  println("DRY RUN NO!")
+                }
               }
 
               if ("${params.DRY_RUN}" == "Yes") {
