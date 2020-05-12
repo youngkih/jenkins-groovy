@@ -121,9 +121,9 @@ pipeline {
         stage("Parameterizing") {
           steps {
             script {
-              String locustFiles = "${LOCUST_FILE}";
-              def times = locustFiles.count(",") as int;
-              int i;
+//              String locustFiles = "${LOCUST_FILE}";
+//              def times = locustFiles.count(",") as int;
+//              int i;
               for(i =0;i<=times;i++){
                 println i
                 if ("${params.DRY_RUN}" != "Yes") {
