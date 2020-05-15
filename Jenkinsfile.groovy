@@ -124,6 +124,7 @@ pipeline {
               String locustFile = "${LOCUST_FILE}";
 
               def files = locustFile.split(",");
+              println(files.replaceAll("_", "-"));
 //              def times = locustFile.count(",") as int;
               def times = files.length;
 
