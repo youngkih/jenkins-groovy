@@ -124,7 +124,7 @@ pipeline {
               String locustFile = "${LOCUST_FILE}";
 
               def files = locustFile.split(",");
-              println(files.replaceAll("_", "-"));
+
 //              def times = locustFile.count(",") as int;
               def times = files.length;
 
@@ -132,7 +132,7 @@ pipeline {
 
               for(i =0;i<times;i++){
                 println("Start!")
-                println(files[i])
+                println(files[i].replaceAll("_", "-"));
 //                env.LOCUST_FILE = files[i]
 //                sh 'printenv'
               }
